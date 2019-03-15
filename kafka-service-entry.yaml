@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: kafka-ext
+  namespace: default
+spec:
+  hosts:
+  - "9.59.193.46"
+  ports:
+  - number: 9092
+    name: kafka
+    protocol: TCP
+  location: MESH_EXTERNAL
