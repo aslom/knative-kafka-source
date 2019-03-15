@@ -1,0 +1,14 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: ContainerSource
+metadata:
+  name: my-kafka-source6
+spec:
+  image: github.com/knative/eventing-sources/contrib/kafka-container-source/cmd
+  args: 
+    - '--bootstrap=9.59.193.46:9092'
+    - '--topic=test'
+    - '--groupId=foobar5'
+  sink:
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    name: message-dumper1
