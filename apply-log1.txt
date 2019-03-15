@@ -1,0 +1,56 @@
+(base) macs-MacBook-Pro:knative-kafka-source aslom$ k delete -f sources_v1alpha2_kafka_container_source2.yaml
+containersource.sources.eventing.knative.dev "my-kafka-source1" deleted
+(base) macs-MacBook-Pro:knative-kafka-source aslom$ ko apply -f sources_v1alpha2_kafka_container_source2.yaml
+2019/03/15 14:03:31 Building github.com/knative/eventing-sources/contrib/kafka-container-source/cmd
+2019/03/15 14:03:33 Using base gcr.io/distroless/static:latest for github.com/knative/eventing-sources/contrib/kafka-container-source/cmd
+2019/03/15 14:03:34 Loading ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:08ac523de51e42584075fd1bf89f4bea30c5f3b741badeecbf149a746634364b
+2019/03/15 14:03:36 Loaded ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:08ac523de51e42584075fd1bf89f4bea30c5f3b741badeecbf149a746634364b
+2019/03/15 14:03:36 Adding tag latest
+2019/03/15 14:03:36 Added tag latest
+containersource.sources.eventing.knative.dev/my-kafka-source1 created
+(base) macs-MacBook-Pro:knative-kafka-source aslom$ k get pods -n knative-sources
+NAME                   READY   STATUS    RESTARTS   AGE
+controller-manager-0   1/1     Running   1          3d22h
+(base) macs-MacBook-Pro:knative-kafka-source aslom$
+(base) macs-MacBook-Pro:knative-kafka-source aslom$
+(base) macs-MacBook-Pro:knative-kafka-source aslom$ k get containersource.sources.eventing.knative.dev/my-kafka-source1 -o yaml
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: ContainerSource
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"sources.eventing.knative.dev/v1alpha1","kind":"ContainerSource","metadata":{"annotations":{},"name":"my-kafka-source1","namespace":"default"},"spec":{"args":["--bootstrap=9.59.193.46:9092","--topic=test","--groupId=foobar"],"image":"ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:08ac523de51e42584075fd1bf89f4bea30c5f3b741badeecbf149a746634364b","sink":{"apiVersion":"v1","kind":"Service","name":"message-dumper1"}}}
+  creationTimestamp: 2019-03-15T18:03:36Z
+  generation: 1
+  name: my-kafka-source1
+  namespace: default
+  resourceVersion: "1034113"
+  selfLink: /apis/sources.eventing.knative.dev/v1alpha1/namespaces/default/containersources/my-kafka-source1
+  uid: a7afcc70-474c-11e9-9b4c-6a1a8c1e2bee
+spec:
+  args:
+  - --bootstrap=9.59.193.46:9092
+  - --topic=test
+  - --groupId=foobar
+  image: ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:08ac523de51e42584075fd1bf89f4bea30c5f3b741badeecbf149a746634364b
+  sink:
+    apiVersion: v1
+    kind: Service
+    name: message-dumper1
+status:
+  conditions:
+  - lastTransitionTime: 2019-03-15T18:03:36Z
+    severity: Error
+    status: Unknown
+    type: Deployed
+  - lastTransitionTime: 2019-03-15T18:03:36Z
+    reason: NotFound
+    severity: Error
+    status: "False"
+    type: Ready
+  - lastTransitionTime: 2019-03-15T18:03:36Z
+    reason: NotFound
+    severity: Error
+    status: "False"
+    type: SinkProvided
+    
