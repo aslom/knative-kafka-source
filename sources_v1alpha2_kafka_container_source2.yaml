@@ -9,6 +9,6 @@ spec:
     - '--topic=test'
     - '--groupId=foobar'
   sink:
-    apiVersion: eventing.knative.dev/v1alpha1
-    kind: Channel
-    name: testchannel
+    apiVersion: v1
+    kind: Service
+    name: message-dumper1
