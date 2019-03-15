@@ -1,0 +1,16 @@
+(base) macs-MacBook-Pro:knative-kafka-source aslom$ ko apply -f dumper1a.yaml
+2019/03/15 15:58:13 Building github.com/knative/eventing-sources/cmd/message_dumper
+2019/03/15 15:58:14 Using base gcr.io/distroless/static:latest for github.com/knative/eventing-sources/cmd/message_dumper
+2019/03/15 15:58:16 Loading ko.local/message_dumper-147eae4dc6ef877ac915642c58dec291:85912a65f1b3ce0bcfc1aaf306ba3a218c423289e6f2c92220b3c5ee6770d32a
+2019/03/15 15:58:17 Loaded ko.local/message_dumper-147eae4dc6ef877ac915642c58dec291:85912a65f1b3ce0bcfc1aaf306ba3a218c423289e6f2c92220b3c5ee6770d32a
+2019/03/15 15:58:17 Adding tag latest
+2019/03/15 15:58:18 Added tag latest
+service.serving.knative.dev/message-dumper1 unchanged
+(base) macs-MacBook-Pro:knative-kafka-source aslom$ ko apply -f kafka-source5.yaml
+2019/03/15 15:58:20 Building github.com/knative/eventing-sources/contrib/kafka-container-source/cmd
+2019/03/15 15:58:22 Using base gcr.io/distroless/static:latest for github.com/knative/eventing-sources/contrib/kafka-container-source/cmd
+2019/03/15 15:58:23 Loading ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:08ac523de51e42584075fd1bf89f4bea30c5f3b741badeecbf149a746634364b
+2019/03/15 15:58:24 Loaded ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:08ac523de51e42584075fd1bf89f4bea30c5f3b741badeecbf149a746634364b
+2019/03/15 15:58:24 Adding tag latest
+2019/03/15 15:58:24 Added tag latest
+containersource.sources.eventing.knative.dev/my-kafka-source5 unchanged
