@@ -97,5 +97,21 @@ Test8
 Verify it was received
 
 ```
-kail -d message-dumper 1--since=10m
+$ kail -d message-dumper1 --since=10m
+
+```
+
+Check logs?
+
+```
+$ k get pods
+NAME                                               READY   STATUS             RESTARTS   AGE
+message-dumper1-869f8d5dd-h6m57                    1/1     Running            0          61s
+my-kafka-source1-nfhkk-64f6b4544b-ghmsr            2/2     Running            0          49s
+
+$ k logs my-kafka-source1-nfhkk-64f6b4544b-ghmsr
+Error from server (BadRequest): a container name must be specified for pod my-kafka-source1-nfhkk-64f6b4544b-ghmsr, choose one of: [source istio-proxy] or one of the init containers: [istio-init]
+
+$ k logs my-kafka-source1-nfhkk-64f6b4544b-ghmsr  -c source
+$
 ```
