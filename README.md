@@ -45,14 +45,14 @@ Chnage sink to
 ```
 
 ```
- ko apply -f sources_v1alpha2_kafka_container_source1.yaml
-2019/03/15 11:03:02 Building github.com/knative/eventing-sources/contrib/kafka-container-source/cmd
-2019/03/15 11:03:10 Using base gcr.io/distroless/static:latest for github.com/knative/eventing-sources/contrib/kafka-container-source/cmd
-2019/03/15 11:03:11 Loading ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:b43a619b71ff8c7cdf8c4bdc9a95502639fd010b83936b1cea3f145215669f36
-2019/03/15 11:03:16 Loaded ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:b43a619b71ff8c7cdf8c4bdc9a95502639fd010b83936b1cea3f145215669f36
-2019/03/15 11:03:16 Adding tag latest
-2019/03/15 11:03:16 Added tag latest
-containersource.sources.eventing.knative.dev/my-kafka-source created
+ko apply -f sources_v1alpha2_kafka_container_source1.yaml
+2019/03/15 11:34:17 Building github.com/knative/eventing-sources/contrib/kafka-container-source/cmd
+2019/03/15 11:34:18 Using base gcr.io/distroless/static:latest for github.com/knative/eventing-sources/contrib/kafka-container-source/cmd
+2019/03/15 11:34:19 Loading ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:b43a619b71ff8c7cdf8c4bdc9a95502639fd010b83936b1cea3f145215669f36
+2019/03/15 11:34:22 Loaded ko.local/cmd-da9621faa5d1b885383c5f2066d4a429:b43a619b71ff8c7cdf8c4bdc9a95502639fd010b83936b1cea3f145215669f36
+2019/03/15 11:34:22 Adding tag latest
+2019/03/15 11:34:22 Added tag latest
+containersource.sources.eventing.knative.dev/my-kafka-source1 unchanged
 ```
 
 # Testing
@@ -64,25 +64,38 @@ cp $GOPATH/src/github.com/knative/eventing-sources/contrib/gcppubsub/samples/dum
 ```
 
 ```
-ko apply -f dumper.yaml
-2019/03/15 11:18:27 Building github.com/knative/eventing-sources/cmd/message_dumper
-2019/03/15 11:18:27 Building github.com/knative/eventing-sources/cmd/message_dumper
-2019/03/15 11:18:29 Using base gcr.io/distroless/static:latest for github.com/knative/eventing-sources/cmd/message_dumper
-2019/03/15 11:18:30 Loading ko.local/message_dumper-147eae4dc6ef877ac915642c58dec291:85912a65f1b3ce0bcfc1aaf306ba3a218c423289e6f2c92220b3c5ee6770d32a
-2019/03/15 11:18:32 Loaded ko.local/message_dumper-147eae4dc6ef877ac915642c58dec291:85912a65f1b3ce0bcfc1aaf306ba3a218c423289e6f2c92220b3c5ee6770d32a
-2019/03/15 11:18:32 Adding tag latest
-2019/03/15 11:18:32 Added tag latest
-deployment.apps/message-dumper created
-Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
-service/message-dumper configured
+ko apply -f dumper1.yaml
+2019/03/15 11:34:05 Building github.com/knative/eventing-sources/cmd/message_dumper
+2019/03/15 11:34:06 Using base gcr.io/distroless/static:latest for github.com/knative/eventing-sources/cmd/message_dumper
+2019/03/15 11:34:07 Loading ko.local/message_dumper-147eae4dc6ef877ac915642c58dec291:85912a65f1b3ce0bcfc1aaf306ba3a218c423289e6f2c92220b3c5ee6770d32a
+2019/03/15 11:34:13 Loaded ko.local/message_dumper-147eae4dc6ef877ac915642c58dec291:85912a65f1b3ce0bcfc1aaf306ba3a218c423289e6f2c92220b3c5ee6770d32a
+2019/03/15 11:34:13 Adding tag latest
+2019/03/15 11:34:14 Added tag latest
+deployment.apps/message-dumper1 unchanged
+service/message-dumper1 unchanged
 ```
 
 Publish to test topic
 
+```
+kafkacat -b ak6.sl.cloud9.ibm.com:9092 -t test -P
+Test8
+```
 
+Verify it published in kafka
+
+```
+kafkacat -b ak6.sl.cloud9.ibm.com:9092 -t test -C
+Test1
+Test3
+Test4
+Test5
+Test7
+Test8
+```
 
 Verify it was received
 
 ```
-kail -d message-dumper --since=10m
+kail -d message-dumper 1--since=10m
 ```
